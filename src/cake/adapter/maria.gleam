@@ -20,12 +20,12 @@ import gmysql.{type Connection, type Error}
 /// This is a thin wrapper around the `gmysql` library's `Connection` type.
 ///
 pub fn with_connection(
-  host: String,
-  port: Int,
-  username: Option(String),
-  password: Option(String),
-  database: String,
-  callback: fn(Connection) -> a,
+  host host: String,
+  port port: Int,
+  username username: Option(String),
+  password password: Option(String),
+  database database: String,
+  callback callback: fn(Connection) -> a,
 ) -> a {
   let assert Ok(connection) =
     gmysql.Config(
@@ -49,9 +49,9 @@ pub fn with_connection(
 /// Convert a Cake `ReadQuery` to a `PreparedStatement`.
 ///
 pub fn read_query_to_prepared_statement(
-  query qry: ReadQuery,
+  query query: ReadQuery,
 ) -> PreparedStatement {
-  qry |> maria_dialect.read_query_to_prepared_statement
+  query |> maria_dialect.read_query_to_prepared_statement
 }
 
 /// Convert a Cake `WriteQuery` to a `PreparedStatement`.
@@ -132,8 +132,8 @@ pub fn run_query(
 /// Execute a raw SQL query against an 🦭MariaDB database.
 ///
 pub fn execute_raw_sql(
-  sql sql: String,
-  connection connection: Connection,
+  query_string query_string: String,
+  db_connection db_connection: Connection,
 ) -> Result(Nil, Error) {
-  sql |> gmysql.exec(on: connection)
+  query_string |> gmysql.exec(on: db_connection)
 }

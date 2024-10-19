@@ -33,12 +33,19 @@ import gleam/dynamic
 const mariadb_database_name = "my_mariadb_database_name"
 
 pub fn main() {
-  mariadb.with_connection(mariadb_database_name, fn(db_connection) {
-    db_connection |> create_table_if_not_exists_birds
-    db_connection |> insert_into_table_birds
-    db_connection |> select_from_table_birds
-    db_connection |> delete_from_table_birds
-  })
+  mariadb.with_connection(
+    host: "localhost",
+    port: 3306,
+    username: None,
+    password: None,
+    database: mariadb_database_name,
+    fn(db_connection) {
+      db_connection |> create_table_if_not_exists_birds
+      db_connection |> insert_into_table_birds
+      db_connection |> select_from_table_birds
+      db_connection |> delete_from_table_birds
+    }
+  )
 }
 
 fn create_table_if_not_exists_birds(db_connection) {
@@ -102,12 +109,19 @@ import gleam/dynamic
 const mysql_database_name = "my_mysql_database_name"
 
 pub fn main() {
-  mysql.with_connection(mysql_database_name, fn(db_connection) {
-    db_connection |> create_table_if_not_exists_birds
-    db_connection |> insert_into_table_birds
-    db_connection |> select_from_table_birds
-    db_connection |> delete_from_table_birds
-  })
+  mysql.with_connection(
+    host: "localhost",
+    port: 3306,
+    username: None,
+    password: None,
+    database: mysql_database_name,
+    fn(db_connection) {
+      db_connection |> create_table_if_not_exists_birds
+      db_connection |> insert_into_table_birds
+      db_connection |> select_from_table_birds
+      db_connection |> delete_from_table_birds
+    }
+  )
 }
 
 fn create_table_if_not_exists_birds(db_connection) {
