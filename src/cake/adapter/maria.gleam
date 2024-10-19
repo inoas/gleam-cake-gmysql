@@ -67,23 +67,15 @@ pub fn run_read_query(
   decoder decoder: fn(Dynamic) -> Result(a, List(DecodeError)),
   db_connection db_connection: Connection,
 ) {
-  let prp_stm = read_query_to_prepared_statement(query)
-  let sql = cake.get_sql(prp_stm)
-  let params = cake.get_params(prp_stm)
-
+  let prepared_statement = query |> read_query_to_prepared_statement
+  let sql_string = prepared_statement |> cake.get_sql
   let db_params =
-    params
-    |> list.map(fn(param: Param) {
-      case param {
-        BoolParam(param) -> gmysql.to_param(param)
-        FloatParam(param) -> gmysql.to_param(param)
-        IntParam(param) -> gmysql.to_param(param)
-        StringParam(param) -> gmysql.to_param(param)
-        NullParam -> gmysql.to_param(Nil)
-      }
-    })
+    prepared_statement
+    |> cake.get_params
+    |> list.map(with: cake_param_to_client_param)
 
-  sql |> gmysql.query(on: db_connection, with: db_params, expecting: decoder)
+  sql_string
+  |> gmysql.query(on: db_connection, with: db_params, expecting: decoder)
 }
 
 /// Run a Cake `WriteQuery` against an 🦭MariaDB database.
@@ -93,23 +85,15 @@ pub fn run_write_query(
   decoder decoder: fn(Dynamic) -> Result(a, List(DecodeError)),
   db_connection db_connection: Connection,
 ) -> Result(List(a), Error) {
-  let prp_stm = write_query_to_prepared_statement(query)
-  let sql = cake.get_sql(prp_stm)
-  let params = cake.get_params(prp_stm)
-
+  let prepared_statement = query |> write_query_to_prepared_statement
+  let sql_string = prepared_statement |> cake.get_sql
   let db_params =
-    params
-    |> list.map(fn(param: Param) -> gmysql.Param {
-      case param {
-        BoolParam(param) -> gmysql.to_param(param)
-        FloatParam(param) -> gmysql.to_param(param)
-        IntParam(param) -> gmysql.to_param(param)
-        StringParam(param) -> gmysql.to_param(param)
-        NullParam -> gmysql.to_param(Nil)
-      }
-    })
+    prepared_statement
+    |> cake.get_params
+    |> list.map(with: cake_param_to_client_param)
 
-  sql |> gmysql.query(on: db_connection, with: db_params, expecting: decoder)
+  sql_string
+  |> gmysql.query(on: db_connection, with: db_params, expecting: decoder)
 }
 
 /// Run a Cake `CakeQuery` against an 🦭MariaDB database.
@@ -136,4 +120,14 @@ pub fn execute_raw_sql(
   db_connection db_connection: Connection,
 ) -> Result(Nil, Error) {
   query_string |> gmysql.exec(on: db_connection)
+}
+
+fn cake_param_to_client_param(param param: Param) {
+  case param {
+    BoolParam(param) -> gmysql.to_param(param)
+    FloatParam(param) -> gmysql.to_param(param)
+    IntParam(param) -> gmysql.to_param(param)
+    StringParam(param) -> gmysql.to_param(param)
+    NullParam -> gmysql.to_param(Nil)
+  }
 }
