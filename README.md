@@ -29,6 +29,7 @@ import cake/insert as i
 import cake/select as s
 import cake/where as w
 import gleam/dynamic
+import gleam/option.{None}
 
 const mariadb_database_name = "my_mariadb_database_name"
 
@@ -105,6 +106,7 @@ import cake/insert as i
 import cake/select as s
 import cake/where as w
 import gleam/dynamic
+import gleam/option.{None}
 
 const mysql_database_name = "my_mysql_database_name"
 
