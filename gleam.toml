@@ -1,6 +1,6 @@
 name = "cake_gmysql"
 version = "1.0.1"
-description = "🎂Cake 🦭MariaDB and 🐬MySQL adapters which which pass PreparedStatements to the gmysql library for execution written in Gleam."
+description = "🎂Cake 🦭MariaDB and 🐬MySQL adapters which pass PreparedStatements to the gmysql library for execution written in Gleam."
 licences = ["MPL-2.0"]
 repository = { type = "github", user = "inoas", repo = "gleam-cake-gmysql" }
 # links = [{ title = "Website", href = "https://gleam.run" }]
