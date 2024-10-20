@@ -1,5 +1,5 @@
 name = "cake_gmysql"
-version = "1.0.0"
+version = "1.0.1"
 description = "🎂Cake 🦭MariaDB and 🐬MySQL adapters which which pass PreparedStatements to the gmysql library for execution written in Gleam."
 licences = ["MPL-2.0"]
 repository = { type = "github", user = "inoas", repo = "gleam-cake-gmysql" }
@@ -14,5 +14,5 @@ pages = [
 
 [dependencies]
 cake = ">= 2.0.0 and < 3.0.0"
-gleam_stdlib = ">= 0.40.0 and < 1.0.0"
+gleam_stdlib = ">= 0.40.0 and < 2.0.0"
 gmysql = ">= 1.4.0 and < 2.0.0"
