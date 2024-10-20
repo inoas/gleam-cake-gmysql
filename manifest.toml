@@ -3,7 +3,7 @@
 
 packages = [
   { name = "based", version = "3.0.1", build_tools = ["gleam"], requirements = ["gleam_erlang", "gleam_otp", "gleam_stdlib"], otp_app = "based", source = "hex", outer_checksum = "67A90B910E6FE7D7539FC4C441FF95274447F802E91309076261B44CECBF8843" },
-  { name = "cake", version = "2.0.0", build_tools = ["gleam"], requirements = ["gleam_stdlib"], otp_app = "cake", source = "hex", outer_checksum = "0F9D47447C0BDABE21522CC9792DA42AEBC1EC43E53919F6173FD843DA88A1B8" },
+  { name = "cake", version = "2.0.1", build_tools = ["gleam"], requirements = ["gleam_stdlib"], otp_app = "cake", source = "hex", outer_checksum = "BA14863BEA659AFCC4B8520CDAD7009E76696F23C573046ED8BD8D72FA712E0C" },
   { name = "gleam_erlang", version = "0.27.0", build_tools = ["gleam"], requirements = ["gleam_stdlib"], otp_app = "gleam_erlang", source = "hex", outer_checksum = "DE468F676D71B313C6C8C5334425CFCF827837333F8AB47B64D8A6D7AA40185D" },
   { name = "gleam_otp", version = "0.12.1", build_tools = ["gleam"], requirements = ["gleam_erlang", "gleam_stdlib"], otp_app = "gleam_otp", source = "hex", outer_checksum = "BFACC1513410DF5A1617169A9CD7EA334973AC71D860A17574BA7B2EADD89A6F" },
   { name = "gleam_stdlib", version = "0.40.0", build_tools = ["gleam"], requirements = [], otp_app = "gleam_stdlib", source = "hex", outer_checksum = "86606B75A600BBD05E539EB59FABC6E307EEEA7B1E5865AFB6D980A93BCB2181" },
@@ -13,5 +13,5 @@ packages = [
 
 [requirements]
 cake = { version = ">= 2.0.0 and < 3.0.0" }
-gleam_stdlib = { version = ">= 0.40.0 and < 1.0.0" }
+gleam_stdlib = { version = ">= 0.40.0 and < 2.0.0" }
 gmysql = { version = ">= 1.4.0 and < 2.0.0" }
