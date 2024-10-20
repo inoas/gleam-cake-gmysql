@@ -1,4 +1,4 @@
-//// 🎂Cake 🐬MySQL adapter which which passes `PreparedStatement`s
+//// 🎂Cake 🐬MySQL adapter which passes `PreparedStatement`s
 //// to the `gmysql` library for execution.
 ////
 
