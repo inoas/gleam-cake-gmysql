@@ -14,7 +14,7 @@
 ## Installation
 
 ```sh
-gleam add cake_gmysql@1
+gleam add cake_gmysql
 ```
 
 ## MariaDB Example
