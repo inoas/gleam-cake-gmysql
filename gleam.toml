@@ -5,7 +5,7 @@ licences = ["MPL-2.0"]
 repository = { type = "github", user = "inoas", repo = "gleam-cake-gmysql" }
 # links = [{ title = "Website", href = "https://gleam.run" }]
 
-gleam = ">= 1.4.0 and < 2.0.0"
+gleam = ">= 1.6.0"
 
 [documentation]
 pages = [
