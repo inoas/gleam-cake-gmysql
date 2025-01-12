@@ -28,7 +28,7 @@ import cake/delete as d
 import cake/insert as i
 import cake/select as s
 import cake/where as w
-import gleam/dynamic
+import gleam/dynamic/decode
 import gleam/option.{None}
 
 const mariadb_database_name = "my_mariadb_database_name"
@@ -71,7 +71,7 @@ fn insert_into_table_birds(db_connection) {
       ]
   )
   |> i.to_query
-  |> mariadb.run_write_query(dynamic.dynamic, db_connection)
+  |> mariadb.run_write_query(decode.dynamic, db_connection)
   |> io.debug
 }
 
@@ -80,7 +80,7 @@ fn select_from_table_birds(db_connection) {
   |> s.from_table("table")
   |> s.selects([s.col("species")])
   |> s.to_query
-  |> mariadb.run_read_query(dynamic.dynamic, db_connection)
+  |> mariadb.run_read_query(decode.dynamic, db_connection)
   |> io.debug
 }
 
@@ -89,7 +89,7 @@ fn delete_from_table_birds(db_connection) {
   |> d.table("birds")
   |> d.where(w.col("species") |> w.eq(w.string("Dodo")))
   |> d.to_query
-  |> mariadb.run_write_query(dynamic.dynamic, db_connection)
+  |> mariadb.run_write_query(decode.dynamic, db_connection)
   |> io.debug
 }
 ```
@@ -148,7 +148,7 @@ fn insert_into_table_birds(db_connection) {
       ]
   )
   |> i.to_query
-  |> mysql.run_write_query(dynamic.dynamic, db_connection)
+  |> mysql.run_write_query(decode.dynamic, db_connection)
   |> io.debug
 }
 
@@ -157,7 +157,7 @@ fn select_from_table_birds(db_connection) {
   |> s.from_table("table")
   |> s.selects([s.col("species")])
   |> s.to_query
-  |> mysql.run_read_query(dynamic.dynamic, db_connection)
+  |> mysql.run_read_query(decode.dynamic, db_connection)
   |> io.debug
 }
 
@@ -166,7 +166,7 @@ fn delete_from_table_birds(db_connection) {
   |> d.table("birds")
   |> d.where(w.col("species") |> w.eq(w.string("Dodo")))
   |> d.to_query
-  |> mysql.run_write_query(dynamic.dynamic, db_connection)
+  |> mysql.run_write_query(decode.dynamic, db_connection)
   |> io.debug
 }
 ```
