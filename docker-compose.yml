@@ -1,0 +1,68 @@
+name: gleam-cake
+networks:
+  gleam-cake-gmysql-test:
+    name: gleam-cake-gmysql-test
+services:
+  mariadb:
+    container_name: gleam-cake-gmysql-test-mariadb
+    dns:
+      - 1.1.1.1
+      - 127.0.0.11
+    image: "mariadb:latest"
+    restart: unless-stopped
+    environment:
+      MARIADB_DATABASE: "gleam_cake_test"
+      MARIADB_ALLOW_EMPTY_ROOT_PASSWORD: true
+      MYSQL_TCP_PORT: 3306
+      MARIADB_TCP_PORT: 3306
+    ports:
+      - "127.0.0.1:3307:3306"
+    volumes:
+      - ./docker/data/maria-data:/var/lib/mysql
+    command:
+      [
+        "--character-set-server=utf8mb4",
+        "--collation-server=utf8mb4_unicode_ci",
+        "--lower_case_table_names=1",
+      ]
+    healthcheck:
+      test: ["CMD", "/usr/local/bin/healthcheck.sh", "--innodb_initialized"]
+      start_period: 5s
+      timeout: 5s
+      interval: 5s
+      retries: 5
+  mysql:
+    container_name: gleam-cake-gmysql-test-mysql
+    dns:
+      - 1.1.1.1
+      - 127.0.0.11
+    image: "mysql:latest"
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: "gleam_cake_test"
+      MYSQL_ALLOW_EMPTY_PASSWORD: true
+      MYSQL_TCP_PORT: 3306
+    ports:
+      - "127.0.0.1:3308:3306"
+    volumes:
+      - ./docker/data/mysql-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "/usr/local/bin/healthcheck.sh", "--innodb_initialized"]
+      start_period: 5s
+      timeout: 5s
+      interval: 5s
+      retries: 5
+    command:
+      [
+        "mysqld",
+        "--character-set-server=utf8mb4",
+        "--collation-server=utf8mb4_unicode_ci",
+        "--lower_case_table_names=1",
+      ]
+    depends_on:
+      mariadb:
+        # condition: service_healthy
+        condition: service_started
+        restart: true
+volumes:
+  gleam-cake-gmysql-test:
